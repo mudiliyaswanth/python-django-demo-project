@@ -17,20 +17,20 @@ class VitalSign(models.Model):
     TYPE_CHOICES = [
         ('HR', 'Heart Rate'),
         ('BP', 'Blood Pressure'),
-        ('Temp', 'Temperature'),
+        ('TEMP', 'Temperature'),
         ('SPO2', 'Oxygen Saturation')
     ]
     
-    type = models.CharField(max_length = 30, choices = TYPE_CHOICES)
+    type = models.CharField(max_length = 20, choices = TYPE_CHOICES)
     
-    value = models.CharField(max_length = 30)
+    value = models.CharField(max_length = 20)
     
     measured_at = models.DateTimeField()
     
     created_at = models.DateTimeField(auto_now_add = True)
     
     class Meta:
-        db_table = "vital_signs"
+        db_table = 'vital_signs'    
         indexes = [
             models.Index(fields = ['type']),
             models.Index(fields = ['measured_at']),
