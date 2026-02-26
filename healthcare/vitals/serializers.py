@@ -51,4 +51,4 @@ class VitalSignSerializer(serializers.ModelSerializer):
         except ValueError:
             raise ValidationError('Heart Rate must be in integer format')
         
-        
+        return data

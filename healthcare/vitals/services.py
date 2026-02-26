@@ -24,3 +24,7 @@ class VitalSignService:
     @staticmethod
     def get_all_vital_signs():
         return VitalSign.objects.all()
+    
+    @staticmethod
+    def get_latest_vital_sign(patient_id, type):
+        return VitalSign.objects.filter(patient_id=patient_id, type=type).order_by('-timestamp').first()

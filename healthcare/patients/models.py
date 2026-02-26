@@ -7,7 +7,9 @@ class Patient(models.Model):
         editable = False
     )
     
-    name = models.CharField(max_length = 60)
+    family_name = models.CharField(max_length=60)  # maps to FHIR "family"
+    
+    given_name = models.CharField(max_length=60)   # maps to FHIR "given" (can be multiple words)
     
     email = models.EmailField(unique = True)
     
@@ -29,4 +31,4 @@ class Patient(models.Model):
         ]
         
     def __str__(self):
-        return f"{self.name} ({self.id})"
+        return f"{self.given_name} {self.family_name} ({self.id})"

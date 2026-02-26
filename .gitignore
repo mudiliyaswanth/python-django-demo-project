@@ -9,3 +9,7 @@ __pycache__/
 .vscode/
 
 .env
+
+structure.py
+
+structure_clean.txt

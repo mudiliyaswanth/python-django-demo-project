@@ -37,4 +37,4 @@ class VitalSign(models.Model):
         ]
         
     def __str__(self):
-        return f'{self.type} for {self.patient.name} at {self.measured_at}: {self.value}'
+        return f'{self.type} for {self.patient.given_name} {self.patient.family_name} at {self.measured_at}: {self.value}'
