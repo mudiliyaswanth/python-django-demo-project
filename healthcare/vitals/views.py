@@ -1,17 +1,19 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
     
 from healthcare.vitals.serializers import VitalSignSerializer
 from healthcare.vitals.services import VitalSignService
-
 
 class VitalSignListCreateView(APIView):
 
     def get(self, request, patient_id):
         vitals = VitalSignService.get_vital_signs(patient_id)
-        serializer = VitalSignSerializer(vitals, many=True)
-        return Response(serializer.data)
+        paginator =  PageNumberPagination()
+        paginated_queryset = paginator.paginate_queryset(vitals, request)
+        serializer = VitalSignSerializer(paginated_queryset, many=True)
+        return paginator.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
 
 
     def post(self, request, patient_id):

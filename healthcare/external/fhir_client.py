@@ -1,4 +1,5 @@
 import requests
+from healthcare.common.exceptions import ExternalServiceException
 
 class FHIRClient:
     @staticmethod
@@ -23,5 +24,5 @@ class FHIRClient:
             data = response.json()
             return data.get('id')
         
-        except requests.exceptions.RequestException as e:
-            raise Exception(f'failed to sync patient: {str(e)}')
+        except Exception as e:
+            raise ExternalServiceException(f'Failed to sync patient', details=str(e))
