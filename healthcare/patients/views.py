@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.pagination import PageNumberPagination
+from healthcare.common.pagination import StandardResultsSetPagination
 
 from healthcare.patients.serializers import PatientSerializer
 from healthcare.patients.services import PatientService
@@ -11,7 +11,7 @@ class PatientListCreateView(APIView):
 
     def get(self, request):
         patients = PatientService.get_all_patients()
-        paginator = PageNumberPagination()
+        paginator = StandardResultsSetPagination()
         paginated_queryset = paginator.paginate_queryset(patients, request)
         serializer = PatientSerializer(paginated_queryset, many=True)
         return paginator.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
