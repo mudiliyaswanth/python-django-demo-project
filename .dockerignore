@@ -22,3 +22,5 @@ __pycache__/
 structure.py
 structure_clean.txt
 
+# Git history
+.git/

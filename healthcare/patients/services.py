@@ -10,7 +10,7 @@ class PatientService:
 
     @staticmethod
     def get_all_patients():
-        return Patient.objects.all()
+        return Patient.objects.all().order_by('id')
     
     @staticmethod
     def get_patient_by_id(patient_id):

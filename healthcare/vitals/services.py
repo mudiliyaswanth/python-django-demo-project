@@ -16,11 +16,11 @@ class VitalSignService:
             patient = Patient.objects.get(id=patient_id)
         except Patient.DoesNotExist:
             raise NotFoundException(f'Patient with id {patient_id} not found')
-        return patient.vital_signs.all()
+        return patient.vital_signs.all().order_by('-timestamp', 'id')
     
     @staticmethod
     def get_all_vital_signs():
-        return VitalSign.objects.all()
+        return VitalSign.objects.all().order_by('id')
     
     @staticmethod
     def get_latest_vital_sign(patient_id, type):
