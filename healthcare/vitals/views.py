@@ -13,7 +13,9 @@ class VitalSignListCreateView(APIView):
         paginator =  StandardResultsSetPagination()
         paginated_queryset = paginator.paginate_queryset(vitals, request)
         serializer = VitalSignSerializer(paginated_queryset, many=True)
-        return paginator.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
+        response = paginator.get_paginated_response(serializer.data)
+        response.status_code = status.HTTP_200_OK
+        return response
 
     def post(self, request, patient_id):
         serializer = VitalSignSerializer(data=request.data)
@@ -33,4 +35,6 @@ class AllVitalSignsView(APIView):
         paginator = StandardResultsSetPagination()
         paginated_queryset = paginator.paginate_queryset(all_vitals, request)
         serializer = VitalSignSerializer(paginated_queryset, many=True)
-        return paginator.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
+        response = paginator.get_paginated_response(serializer.data)
+        response.status_code = status.HTTP_200_OK
+        return response

@@ -14,7 +14,9 @@ class PatientListCreateView(APIView):
         paginator = StandardResultsSetPagination()
         paginated_queryset = paginator.paginate_queryset(patients, request)
         serializer = PatientSerializer(paginated_queryset, many=True)
-        return paginator.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
+        response = paginator.get_paginated_response(serializer.data)
+        response.status_code = status.HTTP_200_OK
+        return response
         
     def post(self, request):
         serializer = PatientSerializer(data=request.data)

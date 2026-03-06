@@ -12,7 +12,7 @@ class PatientService:
     def get_all_patients():
         return Patient.objects.all().order_by('id')
     
-    @staticmethod
+    @staticmethod   
     def get_patient_by_id(patient_id):
         try:
             return Patient.objects.get(id=patient_id)
@@ -40,7 +40,7 @@ class PatientService:
     def sync(patient_id):
         patient = PatientService.get_patient_by_id(patient_id)
         try:
-            registry_id = FHIRClient.sync_patient()
+            registry_id = FHIRClient.sync_patient(patient)
         except Exception as e:
             raise ExternalServiceException(f'Failed to sync patient', details=str(e))
         patient.registry_id = registry_id

@@ -46,7 +46,7 @@ def custom_exception_handler(exc, context):
     return Response(
         {
             'success': False,
-            'error': 'Internal Server Error'
+            'error': f'Internal Server Error, {str(exc)}'
         },
         status = status.HTTP_500_INTERNAL_SERVER_ERROR
     )
